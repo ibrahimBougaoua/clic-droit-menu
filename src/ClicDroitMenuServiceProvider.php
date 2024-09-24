@@ -2,9 +2,9 @@
 
 namespace IbrahimBougaoua\ClicDroitMenu;
 
+use IbrahimBougaoua\ClicDroitMenu\Commands\ClicDroitMenuCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use IbrahimBougaoua\ClicDroitMenu\Commands\ClicDroitMenuCommand;
 
 class ClicDroitMenuServiceProvider extends PackageServiceProvider
 {
