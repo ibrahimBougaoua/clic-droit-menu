@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace IbrahimBougaoua\ClicDroitMenu;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Commands\SkeletonCommand;
+use IbrahimBougaoua\ClicDroitMenu\Commands\ClicDroitMenuCommand;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class ClicDroitMenuServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -16,10 +16,10 @@ class SkeletonServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('skeleton')
+            ->name('clic-droit-menu')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_migration_table_name_table')
-            ->hasCommand(SkeletonCommand::class);
+            ->hasMigration('create_clic_droit_menu_table')
+            ->hasCommand(ClicDroitMenuCommand::class);
     }
 }

@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "ibrahimbougaoua/clic-droit-menu",
+    "description": "This is my package clic-droit-menu",
     "keywords": [
-        ":vendor_name",
+        "IbrahimBougaoua",
         "laravel",
-        ":package_slug"
+        "clic-droit-menu"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/ibrahimbougaoua/clic-droit-menu",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Ibrahim Bougaoua",
+            "email": "41789518+ibrahimBougaoua@users.noreply.github.com",
             "role": "Developer"
         }
     ],
@@ -35,19 +35,19 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "IbrahimBougaoua\\ClicDroitMenu\\": "src/",
+            "IbrahimBougaoua\\ClicDroitMenu\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/",
+            "IbrahimBougaoua\\ClicDroitMenu\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
     "scripts": {
         "post-autoload-dump": "@composer run prepare",
-        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "clear": "@php vendor/bin/testbench package:purge-clic-droit-menu --ansi",
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "build": [
             "@composer run prepare",
@@ -73,10 +73,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "IbrahimBougaoua\\ClicDroitMenu\\ClicDroitMenuServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "ClicDroitMenu": "IbrahimBougaoua\\ClicDroitMenu\\Facades\\ClicDroitMenu"
             }
         }
     },
