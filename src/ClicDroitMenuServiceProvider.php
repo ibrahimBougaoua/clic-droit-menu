@@ -2,9 +2,9 @@
 
 namespace IbrahimBougaoua\ClicDroitMenu;
 
+use IbrahimBougaoua\ClicDroitMenu\Commands\ClicDroitMenuCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use IbrahimBougaoua\ClicDroitMenu\Commands\ClicDroitMenuCommand;
 
 class ClicDroitMenuServiceProvider extends PackageServiceProvider
 {
@@ -21,5 +21,10 @@ class ClicDroitMenuServiceProvider extends PackageServiceProvider
             ->hasViews()
             ->hasMigration('create_clic_droit_menu_table')
             ->hasCommand(ClicDroitMenuCommand::class);
+    }
+
+    public function packageBooted(): void
+    {
+        app(ClicDroitMenu::class);
     }
 }

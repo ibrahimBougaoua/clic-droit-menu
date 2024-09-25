@@ -8,11 +8,36 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('clic_droit_menu_table', function (Blueprint $table) {
+        Schema::create('quick_actions', function (Blueprint $table) {
             $table->id();
-
-            // add fields
-
+            $table->string('label');
+            $table->string('url')->nullable();
+            $table->string('icon')->nullable();
+            $table->string('badge_text')->nullable();
+            $table->string('badge_color')->nullable();
+            $table->boolean('status')->default(false);
+            $table->foreignId('parent_id')->nullable()->constrained('quick_actions')->onDelete('cascade');
+            $table->timestamps();
+        });
+        
+        Schema::create('quick_action_settings', function (Blueprint $table) {
+            $table->id();
+            $table->string('header_label');
+            $table->string('header_back_color')->nullable();
+            $table->string('header_btn_color')->nullable();
+            $table->string('header_url')->nullable();
+            $table->string('header_icon')->nullable();
+            $table->boolean('header_status')->default(false);
+            $table->boolean('search_status')->default(false);
+            $table->string('footer_label')->nullable();
+            $table->string('footer_btn_color')->nullable();
+            $table->string('footer_icon')->nullable();
+            $table->boolean('footer_status')->default(false);
+            $table->integer('max_items')->default(5);
+            $table->integer('max_sub_items')->default(5);
+            $table->boolean('is_collapsed')->default(false);
+            $table->boolean('is_global')->default(false);
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }
