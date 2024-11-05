@@ -1,28 +1,33 @@
 <nav id="sidebar-menu" class="fi-sidebar-nav bg-white shadow-sm rounded-lg flex-grow flex flex-col gap-y-7 overflow-y-auto overflow-x-hidden px-2 py-2 hidden border z-50" style="max-width: 250px; width: 250px;">
-    <div class="mx-2 bg-white">
-        <div class="flex min-w-0 flex-col items-center break-words rounded-lg shadow mb-2" style="background-color: #334d76;">
-            <div class="mb-7.5 h-full w-full rounded-2xl bg-cover bg-center" style="background-image: url('../assets/img/curved-images/white-curved.jpeg')"></div>
-            <div class="relative z-20 flex-auto w-full p-2 text-left">
-                <div class="transition-all duration-200 ease-nav-brand text-white">
-                    <h6 class="mb-0" style="text-align: center;margin-bottom: 10px;">{{ __('panel.Products') }}</h6>
-                    <a href="{{ route('filament.admin.resources.products.create') }}" class="inline-block w-full px-8 py-2 mb-0 font-bold text-center text-black uppercase transition-all ease-in bg-white border-0 border-white rounded-lg shadow-soft-md bg-150 leading-pro text-xs hover:shadow-soft-2xl hover:scale-102" style="background: #19a5a1;">
-                        <div class="flex flex-row justify-center items-center gap-x-3">
-                            <div>
-                                <x-dynamic-component :component="'heroicon-o-cog'" class="fi-sidebar-item-icon h-5 w-5 text-white dark:text-gray-500" />
+    @if($setting && $setting->header_status)
+        <div class="mx-2 bg-white">
+            <div class="flex min-w-0 flex-col items-center break-words rounded-lg shadow mb-2" style="background-color: {{ $setting->header_back_color }};">
+                <div class="relative z-20 flex-auto w-full p-2 text-left">
+                    <div class="transition-all duration-200 ease-nav-brand text-white">
+                        <h6 class="mb-0" style="text-align: center;margin-bottom: 10px;">{{ $setting->header_label }}</h6>
+                        <a href="{{ route('filament.admin.resources.products.create') }}" class="inline-block w-full px-8 py-2 mb-0 font-bold text-center text-black uppercase transition-all ease-in bg-white border-0 border-white rounded-lg shadow-soft-md bg-150 leading-pro text-xs hover:shadow-soft-2xl hover:scale-102" style="background: {{ $setting->header_btn_color }};">
+                            <div class="flex flex-row justify-center items-center gap-x-3">
+                                <div>
+                                    <x-dynamic-component :component="$setting->header_icon" class="fi-sidebar-item-icon h-5 w-5 text-white dark:text-gray-500" />
+                                </div>
+                                <div>
+                                    {{ $setting->header_label }}
+                                </div>
                             </div>
-                            <div>
-                                {{ __('Add Product') }}
-                            </div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Search bar -->
-    <div class="mb-2">
-        <input type="search" id="menu-search" placeholder="Search..." class="w-full px-2 py-1 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-600">
-    </div>
+    @endif
+
+    @if($setting && $setting->search_status)
+        <!-- Search bar -->
+        <div class="mb-2">
+            <input type="search" id="menu-search" placeholder="Search..." class="w-full px-2 py-1 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-600">
+        </div>
+    @endif
+
     <hr class="w-full mb-2" />
     <ul class="fi-sidebar-nav-groups flex flex-col gap-y-7" id="menu-list">
         @foreach($menus as $key => $menu)
@@ -101,38 +106,41 @@
             </div>
         </div>
     </div>
-    <hr class="w-full my-2" />
-    <div class="mx-2">
-        <div class="flex min-w-0 flex-row items-center gap-x-1 break-words">
-            <div class="w-75">
-                <a href="{{ route('filament.admin.resources.quick-actions.quick-action-setting') }}" class="inline-block w-full px-2 py-2 mb-0 font-bold text-white text-center text-black uppercase transition-all ease-in bg-white border-0 border-white rounded-lg shadow-soft-md bg-150 leading-pro text-xs hover:shadow-soft-2xl hover:scale-102" style="background: #334d76;">
-                    <div class="flex flex-row justify-center items-center gap-x-1">
-                        <div>
-                            <x-dynamic-component :component="'heroicon-o-cog'" class="fi-sidebar-item-icon h-4 w-4 text-white dark:text-gray-500" />
+
+    @if($setting && $setting->footer_status)
+        <hr class="w-full my-2" />
+        <div class="mx-2">
+            <div class="flex min-w-0 flex-row items-center gap-x-1 break-words">
+                <div class="w-75">
+                    <a href="{{ route('filament.admin.resources.quick-actions.quick-action-setting') }}" class="inline-block w-full px-2 py-2 mb-0 font-bold text-white text-center text-black uppercase transition-all ease-in bg-white border-0 border-white rounded-lg shadow-soft-md bg-150 leading-pro text-xs hover:shadow-soft-2xl hover:scale-102" style="background: {{ $setting->footer_btn_color }};">
+                        <div class="flex flex-row justify-center items-center gap-x-1">
+                            <div>
+                                <x-dynamic-component :component="$setting->footer_icon" class="fi-sidebar-item-icon h-4 w-4 text-white dark:text-gray-500" />
+                            </div>
+                            <div>
+                                {{ $setting->footer_label }}
+                            </div>
                         </div>
-                        <div>
-                            {{ __('Manage') }}
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="w-25">
-                <button id="move-sidebar-menu" class="flex flex-row justify-center items-center inline-block w-full px-2 py-2 mb-0 font-bold text-white text-center text-black uppercase transition-all ease-in bg-white border-0 border-white rounded-lg shadow-soft-md bg-150 leading-pro text-xs hover:shadow-soft-2xl hover:scale-102" style="background-color: #16a085;">
-                    <x-dynamic-component :component="'heroicon-o-arrows-pointing-out'" class="fi-sidebar-item-icon h-4 w-4 text-white dark:text-gray-500" />
-                </button>
-            </div>
-            <div class="w-25">
-                <button wire:click="$dispatch('minimized')" id="minimized-sidebar-menu" class="flex flex-row justify-center items-center inline-block w-full px-2 py-2 mb-0 font-bold text-white text-center text-black uppercase transition-all ease-in bg-white border-0 border-white rounded-lg shadow-soft-md bg-150 leading-pro text-xs hover:shadow-soft-2xl hover:scale-102" style="background-color: #2980b9;">
-                    <x-dynamic-component :component="'heroicon-o-arrow-top-right-on-square'" class="fi-sidebar-item-icon h-4 w-4 text-white dark:text-gray-500" />
-                </button>
-            </div>
-            <div class="w-25">
-                <button id="close-sidebar" class="flex flex-row justify-center items-center inline-block w-full px-2 py-2 mb-0 font-bold text-white text-center text-black uppercase transition-all ease-in bg-white border-0 border-white rounded-lg shadow-soft-md bg-150 leading-pro text-xs hover:shadow-soft-2xl hover:scale-102" style="background-color: #e74c3c;">
-                    <x-dynamic-component :component="'heroicon-o-x-mark'" class="fi-sidebar-item-icon h-4 w-4 text-white dark:text-gray-500" />
-                </button>
+                    </a>
+                </div>
+                <div class="w-25">
+                    <button id="move-sidebar-menu" class="flex flex-row justify-center items-center inline-block w-full px-2 py-2 mb-0 font-bold text-white text-center text-black uppercase transition-all ease-in bg-white border-0 border-white rounded-lg shadow-soft-md bg-150 leading-pro text-xs hover:shadow-soft-2xl hover:scale-102" style="background-color: #16a085;">
+                        <x-dynamic-component :component="'heroicon-o-arrows-pointing-out'" class="fi-sidebar-item-icon h-4 w-4 text-white dark:text-gray-500" />
+                    </button>
+                </div>
+                <div class="w-25">
+                    <button wire:click="$dispatch('minimized')" id="minimized-sidebar-menu" class="flex flex-row justify-center items-center inline-block w-full px-2 py-2 mb-0 font-bold text-white text-center text-black uppercase transition-all ease-in bg-white border-0 border-white rounded-lg shadow-soft-md bg-150 leading-pro text-xs hover:shadow-soft-2xl hover:scale-102" style="background-color: #2980b9;">
+                        <x-dynamic-component :component="'heroicon-o-arrow-top-right-on-square'" class="fi-sidebar-item-icon h-4 w-4 text-white dark:text-gray-500" />
+                    </button>
+                </div>
+                <div class="w-25">
+                    <button id="close-sidebar" class="flex flex-row justify-center items-center inline-block w-full px-2 py-2 mb-0 font-bold text-white text-center text-black uppercase transition-all ease-in bg-white border-0 border-white rounded-lg shadow-soft-md bg-150 leading-pro text-xs hover:shadow-soft-2xl hover:scale-102" style="background-color: #e74c3c;">
+                        <x-dynamic-component :component="'heroicon-o-x-mark'" class="fi-sidebar-item-icon h-4 w-4 text-white dark:text-gray-500" />
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
+    @endif
 </nav>
 
 <!-- JavaScript for right-click, search, and sidebar toggle -->

@@ -25,6 +25,6 @@ class ClicDroitMenuServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
-        app(ClicDroitMenu::class);
+        //app(ClicDroitMenu::class);
     }
 }
