@@ -4,10 +4,7 @@ namespace IbrahimBougaoua\ClicDroitMenu;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
-use Filament\Support\Facades\FilamentView;
-use Filament\View\PanelsRenderHook;
 use IbrahimBougaoua\ClicDroitMenu\Resources\QuickActionResource;
-use Illuminate\Support\Facades\Blade;
 
 class ClicDroitMenuPlugin implements Plugin
 {

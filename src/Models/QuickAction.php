@@ -18,7 +18,7 @@ class QuickAction extends Model
         'status',
         'parent_id',
     ];
-    
+
     public function scopeRoot($query)
     {
         return $query->whereNull('parent_id');
@@ -31,16 +31,16 @@ class QuickAction extends Model
 
     public function scopeActive($query)
     {
-        return $query->where('status',true);
+        return $query->where('status', true);
     }
 
     public function parent()
     {
-        return $this->belongsTo(QuickAction::class,'parent_id');
+        return $this->belongsTo(QuickAction::class, 'parent_id');
     }
 
     public function children()
     {
-        return $this->hasMany(QuickAction::class,'parent_id');
+        return $this->hasMany(QuickAction::class, 'parent_id');
     }
 }

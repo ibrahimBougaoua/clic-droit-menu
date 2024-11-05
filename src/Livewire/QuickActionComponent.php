@@ -9,6 +9,7 @@ use Livewire\Component;
 class QuickActionComponent extends Component
 {
     public $menus = [];
+
     public $setting;
 
     public function mount()

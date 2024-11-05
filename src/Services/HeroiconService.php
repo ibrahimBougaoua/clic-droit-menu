@@ -2,7 +2,8 @@
 
 namespace IbrahimBougaoua\ClicDroitMenu\Services;
 
-class HeroiconService {
+class HeroiconService
+{
     public static function getIcons()
     {
         return [
@@ -230,7 +231,7 @@ class HeroiconService {
             'heroicon-o-x' => 'X',
             'heroicon-o-zoom-in' => 'Zoom In',
             'heroicon-o-zoom-out' => 'Zoom Out',
-        
+
             // Solid Icons
             'heroicon-s-academic-cap' => 'Academic Cap',
             'heroicon-s-adjustments' => 'Adjustments',
@@ -456,5 +457,5 @@ class HeroiconService {
             'heroicon-s-zoom-in' => 'Zoom In',
             'heroicon-s-zoom-out' => 'Zoom Out',
         ];
-    }    
+    }
 }

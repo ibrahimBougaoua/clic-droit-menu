@@ -5,7 +5,7 @@
                 <div class="relative z-20 flex-auto w-full p-2 text-left">
                     <div class="transition-all duration-200 ease-nav-brand text-white">
                         <h6 class="mb-0" style="text-align: center;margin-bottom: 10px;">{{ $setting->header_label }}</h6>
-                        <a href="{{ route('filament.admin.resources.products.create') }}" class="inline-block w-full px-8 py-2 mb-0 font-bold text-center text-black uppercase transition-all ease-in bg-white border-0 border-white rounded-lg shadow-soft-md bg-150 leading-pro text-xs hover:shadow-soft-2xl hover:scale-102" style="background: {{ $setting->header_btn_color }};">
+                        <a href="{{ $setting->header_url }}" class="inline-block w-full px-8 py-2 mb-0 font-bold text-center text-black uppercase transition-all ease-in bg-white border-0 border-white rounded-lg shadow-soft-md bg-150 leading-pro text-xs hover:shadow-soft-2xl hover:scale-102" style="background: {{ $setting->header_btn_color }};">
                             <div class="flex flex-row justify-center items-center gap-x-3">
                                 <div>
                                     <x-dynamic-component :component="$setting->header_icon" class="fi-sidebar-item-icon h-5 w-5 text-white dark:text-gray-500" />
@@ -93,19 +93,22 @@
             @endif
         @endforeach
     </ul>
-    <div class="mx-2 bg-white no-found" style="display: none;">
-        <div class="flex min-w-0 flex-col items-center break-words rounded-lg shadow mb-2" style="background-color: #334d76;">
-            <div class="mb-7.5 h-full w-full rounded-2xl bg-cover bg-center" style="background-image: url('../assets/img/curved-images/white-curved.jpeg')"></div>
-            <div class="relative z-20 flex-auto w-full p-4 text-left">
-                <div class="transition-all duration-200 ease-nav-brand text-white">
-                    <h6 class="mb-0" style="text-align: center;margin-bottom: 10px;">{{ __('No data found') }}</h6>
-                    <a href="{{ route('filament.admin.resources.products.create') }}" class="inline-block w-full px-8 py-2 mb-0 font-bold text-center text-black uppercase transition-all ease-in bg-white border-0 border-white rounded-lg shadow-soft-md bg-150 leading-pro text-xs hover:shadow-soft-2xl hover:scale-102" style="background: #19a5a1;">
-                        {{ __('panel.Add Product') }}
-                    </a>
+
+    @if($setting && $setting->footer_status)
+        <div class="mx-2 bg-white no-found" style="display: none;">
+            <div class="flex min-w-0 flex-col items-center break-words rounded-lg shadow mb-2" style="background-color: #334d76;">
+                <div class="mb-7.5 h-full w-full rounded-2xl bg-cover bg-center" style="background-image: url('../assets/img/curved-images/white-curved.jpeg')"></div>
+                <div class="relative z-20 flex-auto w-full p-4 text-left">
+                    <div class="transition-all duration-200 ease-nav-brand text-white">
+                        <h6 class="mb-0" style="text-align: center;margin-bottom: 10px;">{{ __('No data found') }}</h6>
+                        <a href="{{ $setting->header_url }}" class="inline-block w-full px-8 py-2 mb-0 font-bold text-center text-black uppercase transition-all ease-in bg-white border-0 border-white rounded-lg shadow-soft-md bg-150 leading-pro text-xs hover:shadow-soft-2xl hover:scale-102" style="background: #19a5a1;">
+                            {{ $setting->header_label }}
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
 
     @if($setting && $setting->footer_status)
         <hr class="w-full my-2" />

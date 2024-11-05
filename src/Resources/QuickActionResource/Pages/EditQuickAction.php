@@ -2,9 +2,9 @@
 
 namespace IbrahimBougaoua\ClicDroitMenu\Resources\QuickActionResource\Pages;
 
-use IbrahimBougaoua\ClicDroitMenu\Resources\QuickActionResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use IbrahimBougaoua\ClicDroitMenu\Resources\QuickActionResource;
 
 class EditQuickAction extends EditRecord
 {

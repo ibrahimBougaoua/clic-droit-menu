@@ -2,9 +2,8 @@
 
 namespace IbrahimBougaoua\ClicDroitMenu\Resources\QuickActionResource\Pages;
 
-use IbrahimBougaoua\ClicDroitMenu\Resources\QuickActionResource;
-use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
+use IbrahimBougaoua\ClicDroitMenu\Resources\QuickActionResource;
 
 class CreateQuickAction extends CreateRecord
 {
