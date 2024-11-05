@@ -2,7 +2,7 @@
 
 namespace IbrahimBougaoua\ClicDroitMenu\Livewire;
 
-use App\Models\QuickActionSetting;
+use IbrahimBougaoua\ClicDroitMenu\Models\QuickActionSetting;
 use IbrahimBougaoua\ClicDroitMenu\Services\QuickActionService;
 use Livewire\Component;
 
