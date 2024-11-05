@@ -10,8 +10,8 @@ use Filament\View\PanelsRenderHook;
 use Illuminate\Support\Facades\Blade;
 use Livewire\Livewire;
 
-class ClicDroitMenu {
-    
+class ClicDroitMenu
+{
     public function __construct()
     {
         $this->registerQuickActionButtonComponent();
@@ -21,12 +21,12 @@ class ClicDroitMenu {
 
     public function loadAssets()
     {
-            FilamentAsset::register(
-                [
-                    Css::make('custom-css', __DIR__.'/../resources/css/custom.css'),
-                ],
-                package: 'ibrahimbougaoua/clic-droit-menu'
-            );
+        FilamentAsset::register(
+            [
+                Css::make('custom-css', __DIR__.'/../resources/css/custom.css'),
+            ],
+            package: 'ibrahimbougaoua/clic-droit-menu'
+        );
     }
 
     public function registerQuickActionButtonComponent()

@@ -2,12 +2,6 @@
 
 namespace IbrahimBougaoua\ClicDroitMenu\Resources;
 
-use IbrahimBougaoua\ClicDroitMenu\Resources\QuickActionResource\Pages;
-use IbrahimBougaoua\ClicDroitMenu\Resources\QuickActionResource\RelationManagers;
-use IbrahimBougaoua\ClicDroitMenu\Models\QuickAction;
-use IbrahimBougaoua\ClicDroitMenu\Services\HeroiconService;
-use IbrahimBougaoua\ClicDroitMenu\Services\RoutesService;
-use Filament\Forms;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Section;
@@ -18,18 +12,18 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Table;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\ColorColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Throwable;
+use Filament\Tables\Table;
+use IbrahimBougaoua\ClicDroitMenu\Models\QuickAction;
+use IbrahimBougaoua\ClicDroitMenu\Resources\QuickActionResource\Pages;
+use IbrahimBougaoua\ClicDroitMenu\Services\HeroiconService;
+use IbrahimBougaoua\ClicDroitMenu\Services\RoutesService;
 
 class QuickActionResource extends Resource
 {
@@ -41,65 +35,65 @@ class QuickActionResource extends Resource
     {
         return $form
             ->schema([
-                    Section::make()
-                        ->schema([
-                            TextInput::make('label')
-                                ->required()
-                                ->maxLength(255)
-                                ->label(__('Label'))
-                                ->columnSpanFull(),
-                            //Hidden::make('url'),
-                            //Hidden::make('icon'),
-                            Tabs::make('Tabs')
-                                ->label(__('Url'))
-                                ->tabs([
-                                    Tabs\Tab::make('Default')
-                                        ->schema([
-                                            Select::make('url')
-                                                ->label(__('Url'))
-                                                ->options(
-                                                    RoutesService::getResourceRoutes()
-                                                )
-                                                ->reactive()
-                                                ->afterStateUpdated(fn ($state, callable $set) => $set('url', $state))
-                                                ->searchable(),
-                                            Select::make('icon')
-                                                ->label(__('Icon'))
-                                                ->options(HeroiconService::getIcons())
-                                                ->reactive() // Make the field reactive
-                                                ->afterStateUpdated(fn ($state, callable $set) => $set('icon', $state)) // Track the selected icon
-                                                ->searchable(),
-                                        ])
-                                        ->columns(2),
-                                    Tabs\Tab::make('Custom')
-                                        ->schema([
-                                            TextInput::make('url')
-                                                ->maxLength(255)
-                                                ->afterStateUpdated(fn ($state, callable $set) => $set('url', $state))
-                                                ->label(__('Url')),
-                                            TextInput::make('icon')
-                                                ->maxLength(255)
-                                                ->afterStateUpdated(fn ($state, callable $set) => $set('url', $state))
-                                                ->label(__('Icon')),
-                                        ])
-                                        ->columns(2),
-                                ])
-                                ->columnSpanFull(),
-                            TextInput::make('badge_text')
-                                ->maxLength(255)
-                                ->label(__('Badge Value')),
-                            ColorPicker::make('badge_color')
-                                ->label(__('Badge Color')),
-                            Select::make('parent_id')
-                                ->label(__('Action'))
-                                ->options(QuickAction::pluck('label','id')->toArray())
-                                ->searchable()
-                                ->label(__('Action')),
-                            Toggle::make('status')
-                                ->required()
-                                ->label(__('Status')),
-                ])
-                ->columns(2)
+                Section::make()
+                    ->schema([
+                        TextInput::make('label')
+                            ->required()
+                            ->maxLength(255)
+                            ->label(__('Label'))
+                            ->columnSpanFull(),
+                        //Hidden::make('url'),
+                        //Hidden::make('icon'),
+                        Tabs::make('Tabs')
+                            ->label(__('Url'))
+                            ->tabs([
+                                Tabs\Tab::make('Default')
+                                    ->schema([
+                                        Select::make('url')
+                                            ->label(__('Url'))
+                                            ->options(
+                                                RoutesService::getResourceRoutes()
+                                            )
+                                            ->reactive()
+                                            ->afterStateUpdated(fn ($state, callable $set) => $set('url', $state))
+                                            ->searchable(),
+                                        Select::make('icon')
+                                            ->label(__('Icon'))
+                                            ->options(HeroiconService::getIcons())
+                                            ->reactive() // Make the field reactive
+                                            ->afterStateUpdated(fn ($state, callable $set) => $set('icon', $state)) // Track the selected icon
+                                            ->searchable(),
+                                    ])
+                                    ->columns(2),
+                                Tabs\Tab::make('Custom')
+                                    ->schema([
+                                        TextInput::make('url')
+                                            ->maxLength(255)
+                                            ->afterStateUpdated(fn ($state, callable $set) => $set('url', $state))
+                                            ->label(__('Url')),
+                                        TextInput::make('icon')
+                                            ->maxLength(255)
+                                            ->afterStateUpdated(fn ($state, callable $set) => $set('url', $state))
+                                            ->label(__('Icon')),
+                                    ])
+                                    ->columns(2),
+                            ])
+                            ->columnSpanFull(),
+                        TextInput::make('badge_text')
+                            ->maxLength(255)
+                            ->label(__('Badge Value')),
+                        ColorPicker::make('badge_color')
+                            ->label(__('Badge Color')),
+                        Select::make('parent_id')
+                            ->label(__('Action'))
+                            ->options(QuickAction::pluck('label', 'id')->toArray())
+                            ->searchable()
+                            ->label(__('Action')),
+                        Toggle::make('status')
+                            ->required()
+                            ->label(__('Status')),
+                    ])
+                    ->columns(2),
             ]);
     }
 
@@ -162,7 +156,7 @@ class QuickActionResource extends Resource
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
