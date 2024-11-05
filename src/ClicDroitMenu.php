@@ -2,8 +2,6 @@
 
 namespace IbrahimBougaoua\ClicDroitMenu;
 
-use Filament\Support\Assets\Css;
-use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentView;
 use Filament\Tables\View\TablesRenderHook;
 use Filament\View\PanelsRenderHook;
