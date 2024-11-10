@@ -84,7 +84,7 @@ class QuickActionResource extends Resource
                                         Select::make('icon')
                                             ->label(__('Icon'))
                                             ->options(HeroiconService::getIcons())
-                                            ->reactive() 
+                                            ->reactive()
                                             ->afterStateUpdated(fn ($state, callable $set) => $set('icon', $state))
                                             ->searchable(),
                                     ])

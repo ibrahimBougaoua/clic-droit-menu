@@ -53,7 +53,6 @@ class ClicDroitMenuPlugin implements Plugin
         app(ClicDroitMenu::class);
     }
 
-
     public static function get(): static
     {
         return filament(app(static::class)->getId());

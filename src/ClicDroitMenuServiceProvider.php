@@ -2,8 +2,6 @@
 
 namespace IbrahimBougaoua\ClicDroitMenu;
 
-use Filament\Support\Assets\Css;
-use Filament\Support\Facades\FilamentAsset;
 use IbrahimBougaoua\ClicDroitMenu\Commands\ClicDroitMenuCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;

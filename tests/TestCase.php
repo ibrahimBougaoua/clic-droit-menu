@@ -2,9 +2,9 @@
 
 namespace IbrahimBougaoua\ClicDroitMenu\Tests;
 
+use IbrahimBougaoua\ClicDroitMenu\ClicDroitMenuServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use IbrahimBougaoua\ClicDroitMenu\ClicDroitMenuServiceProvider;
 
 class TestCase extends Orchestra
 {
