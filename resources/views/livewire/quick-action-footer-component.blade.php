@@ -36,7 +36,6 @@
     </style>
 </div>
 
-<!-- JavaScript for right-click, search, and sidebar toggle -->
 <script>
     document.addEventListener('livewire:init', () => {
         var isSidebarMenuOpened = localStorage.getItem("isSidebarMenuOpened");
@@ -68,10 +67,7 @@
         });
 
         Livewire.on('minimized', () => {
-            // Retrieve current maximized state from localStorage, defaulting to false if not set
-            const minimized = localStorage.getItem("isMaximized") !== 'true'; // Convert to boolean
-
-            // Show or hide the sidebar menu based on the new state
+            const minimized = localStorage.getItem("isMaximized") !== 'true';
             quickActions.style.display = minimized ? 'block' : 'none';
         });
     });

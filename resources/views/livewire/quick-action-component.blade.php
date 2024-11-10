@@ -22,12 +22,11 @@
     @endif
 
     @if($setting && $setting->search_status)
-        <!-- Search bar -->
         <div class="mb-2">
             <input type="search" id="menu-search" placeholder="Search..." class="w-full px-2 py-1 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-600">
         </div>
     @endif
-
+    
     <hr class="w-full mb-2" />
     <ul class="fi-sidebar-nav-groups flex flex-col gap-y-7" id="menu-list">
         @foreach($menus as $key => $menu)
@@ -36,7 +35,7 @@
                     <ul class="fi-sidebar-group-items flex flex-col gap-y-1">
                         <li class="fi-sidebar-item">
                             <a
-                                href="{{ $menu->url }}"
+                                href="/{{ $menu->url }}"
                                 x-on:click="window.matchMedia(`(max-width: 1024px)`).matches &amp;&amp; $store.sidebar.close()"
                                 class="fi-sidebar-item-button relative flex items-center justify-center gap-x-3 rounded-lg px-2 py-2 outline-none transition duration-75 hover:bg-gray-100 focus-visible:bg-gray-100 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"
                             >
@@ -94,15 +93,15 @@
         @endforeach
     </ul>
 
-    @if($setting && $setting->footer_status)
+    @if($setting)
         <div class="mx-2 bg-white no-found" style="display: none;">
             <div class="flex min-w-0 flex-col items-center break-words rounded-lg shadow mb-2" style="background-color: #334d76;">
                 <div class="mb-7.5 h-full w-full rounded-2xl bg-cover bg-center" style="background-image: url('../assets/img/curved-images/white-curved.jpeg')"></div>
                 <div class="relative z-20 flex-auto w-full p-4 text-left">
                     <div class="transition-all duration-200 ease-nav-brand text-white">
                         <h6 class="mb-0" style="text-align: center;margin-bottom: 10px;">{{ __('No data found') }}</h6>
-                        <a href="{{ $setting->header_url }}" class="inline-block w-full px-8 py-2 mb-0 font-bold text-center text-black uppercase transition-all ease-in bg-white border-0 border-white rounded-lg shadow-soft-md bg-150 leading-pro text-xs hover:shadow-soft-2xl hover:scale-102" style="background: #19a5a1;">
-                            {{ $setting->header_label }}
+                        <a href="{{ route('filament.admin.resources.quick-actions.create') }}" class="inline-block w-full px-8 py-2 mb-0 font-bold text-center text-black uppercase transition-all ease-in bg-white border-0 border-white rounded-lg shadow-soft-md bg-150 leading-pro text-xs hover:shadow-soft-2xl hover:scale-102" style="background: #19a5a1;">
+                            {{ __('New Quick Action') }}
                         </a>
                     </div>
                 </div>
@@ -146,20 +145,16 @@
     @endif
 </nav>
 
-<!-- JavaScript for right-click, search, and sidebar toggle -->
 <script>
     document.addEventListener('livewire:init', () => {
         var isSidebarMenuOpened = localStorage.getItem("isSidebarMenuOpened");
 
-        // Retrieve 'isMaximized' from localStorage, if it's null (not yet set), initialize it to 'true'.
         var isMaximized = localStorage.getItem("isMaximized");
 
         if (isMaximized === null) {
-            // Set the default value to 'true' if it's not in localStorage yet
             isMaximized = true;
             localStorage.setItem("isMaximized", true);
         } else {
-            // Convert the stored string to a boolean value
             isMaximized = (isMaximized === 'true');
         }
 
@@ -179,57 +174,50 @@
             console.log(isSidebarMenuOpened);
         }
 
-        // Search Functionality
         searchInput.addEventListener('input', function () {
             const searchTerm = searchInput.value.toLowerCase();
             const noFound = document.querySelector('.no-found');
+            let globalMatchFound = false;
 
-            // Filter root menu items
             menuItems.forEach(item => {
                 const label = item.querySelector('.search-menu')?.textContent.toLowerCase() || '';
                 let matchFound = false;
 
-                // Check if root menu label matches search term
                 if (label.includes(searchTerm)) {
                     item.style.display = 'block';
                     matchFound = true;
+                    globalMatchFound = true;
                 } else {
                     item.style.display = 'none';
                 }
 
-                // If there are submenus, check if any submenu item matches
                 const submenus = item.querySelectorAll('.fi-sidebar-group-items .fi-sidebar-item');
                 submenus.forEach(submenu => {
                     const submenuLabel = submenu.querySelector('.search-menu')?.textContent.toLowerCase() || '';
                     if (submenuLabel.includes(searchTerm)) {
-                        submenu.style.display = 'block';  // Show matching submenu
-                        item.style.display = 'block';     // Show parent menu if a submenu matches
+                        submenu.style.display = 'block';
+                        item.style.display = 'block';
                         matchFound = true;
+                        globalMatchFound = true;
                     } else {
                         submenu.style.display = 'none';
                     }
                 });
 
-                // If no match found in submenus, hide the root menu item
                 if (!matchFound) {
                     item.style.display = 'none';
-                    noFound.style.display = 'block';
-                } else {
-                    noFound.style.display = 'none';
                 }
             });
 
-            noFound.style.display = 'none';
+            noFound.style.display = globalMatchFound ? 'none' : 'block';
         });
 
-        // Handle Ctrl + Shift to toggle the sidebar
         document.addEventListener('keydown', function (e) {
             if (e.ctrlKey && e.shiftKey) {
                 sidebarMenu.style.display = sidebarMenu.style.display === 'block' ? 'none' : 'block';
             }
         });
 
-        // Handle right-click to show the sidebar
         document.querySelector('.fi-layout').addEventListener('contextmenu', function (e) {
             //if(!isSidebarMenuOpened)
             //{
@@ -272,7 +260,6 @@
             sidebarMenu.style.top = `${posY}px`;
         }
 
-        // Prevent sidebar from hiding when clicking inside
         sidebarMenu.addEventListener('click', function (e) {
             e.stopPropagation();
         });
@@ -341,16 +328,9 @@
         });
 
         Livewire.on('maximized', () => {
-            // Retrieve current maximized state from localStorage, defaulting to false if not set
-            const maximized = localStorage.getItem("isMaximized") === 'true'; // Convert to boolean
-
-            // Toggle the state
+            const maximized = localStorage.getItem("isMaximized") === 'true';
             const newMaximizedState = !maximized;
-
-            // Store the new state in localStorage
             localStorage.setItem('isMaximized', newMaximizedState);
-
-            // Show or hide the sidebar menu based on the new state
             sidebarMenu.style.display = newMaximizedState ? 'block' : 'none';
         });
     });

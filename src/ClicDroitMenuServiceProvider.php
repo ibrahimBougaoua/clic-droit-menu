@@ -27,17 +27,6 @@ class ClicDroitMenuServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
-        $this->loadAssets();
-        //app(ClicDroitMenu::class);
-    }
-
-    public function loadAssets()
-    {
-        FilamentAsset::register(
-            [
-                Css::make('clic-droit-menu-styles', __DIR__.'/../resources/css/custom.css'),
-            ],
-            package: 'ibrahimbougaoua/clic-droit-menu'
-        );
+        //
     }
 }

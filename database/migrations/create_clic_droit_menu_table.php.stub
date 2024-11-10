@@ -40,5 +40,29 @@ return new class extends Migration
             $table->boolean('status')->default(false);
             $table->timestamps();
         });
+
+        // Insert default data only if the table is empty
+        if (DB::table('quick_action_settings')->count() == 0) {
+            DB::table('quick_action_settings')->insert([
+                'header_label' => 'Dashboard',
+                'header_back_color' => '#16a085',
+                'header_btn_color' => '#1abc9c',
+                'header_url' => '/admin',
+                'header_icon' => 'heroicon-s-chart-bar',
+                'header_status' => true,
+                'search_status' => true,
+                'footer_label' => 'Manage',
+                'footer_btn_color' => '#8e44ad',
+                'footer_icon' => 'heroicon-s-cog-8-tooth',
+                'footer_status' => true,
+                'max_items' => 8,
+                'max_sub_items' => 5,
+                'is_collapsed' => true,
+                'is_global' => true,
+                'status' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 };

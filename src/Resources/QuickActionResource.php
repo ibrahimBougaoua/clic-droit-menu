@@ -20,6 +20,7 @@ use Filament\Tables\Columns\ColorColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
+use IbrahimBougaoua\ClicDroitMenu\ClicDroitMenuPlugin;
 use IbrahimBougaoua\ClicDroitMenu\Models\QuickAction;
 use IbrahimBougaoua\ClicDroitMenu\Resources\QuickActionResource\Pages;
 use IbrahimBougaoua\ClicDroitMenu\Services\HeroiconService;
@@ -29,7 +30,30 @@ class QuickActionResource extends Resource
 {
     protected static ?string $model = QuickAction::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-bars-4';
+    public static function getModelLabel(): string
+    {
+        return config('clic-droit-menu.resources.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return config('clic-droit-menu.resources.plural_label');
+    }
+
+    public static function getNavigationIcon(): string
+    {
+        return ClicDroitMenuPlugin::get()->getNavigationIcon();
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return config('clic-droit-menu.resources.label');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return config('clic-droit-menu.resources.navigation_group');
+    }
 
     public static function form(Form $form): Form
     {
@@ -60,8 +84,8 @@ class QuickActionResource extends Resource
                                         Select::make('icon')
                                             ->label(__('Icon'))
                                             ->options(HeroiconService::getIcons())
-                                            ->reactive() // Make the field reactive
-                                            ->afterStateUpdated(fn ($state, callable $set) => $set('icon', $state)) // Track the selected icon
+                                            ->reactive() 
+                                            ->afterStateUpdated(fn ($state, callable $set) => $set('icon', $state))
                                             ->searchable(),
                                     ])
                                     ->columns(2),
@@ -162,8 +186,8 @@ class QuickActionResource extends Resource
         return [
             'index' => Pages\ListQuickActions::route('/'),
             'quick-action-setting' => Pages\QuickActionSetting::route('/quick-action-setting'),
-            //'create' => Pages\CreateQuickAction::route('/create'),
-            //'edit' => Pages\EditQuickAction::route('/{record}/edit'),
+            'create' => Pages\CreateQuickAction::route('/create'),
+            'edit' => Pages\EditQuickAction::route('/{record}/edit'),
         ];
     }
 }
